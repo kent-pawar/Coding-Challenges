@@ -2,7 +2,9 @@
 
 Refer: https://www.hackerrank.com/challenges/the-minion-game/problem?h_r=next-challenge&h_v=zen
 
-# Solution
+
+# Solution-1 : High time complexity
+
 ```python
 # Get all possible combination of words
 s = 'BANANA'
@@ -88,6 +90,8 @@ for i in counts:
 
 if score_vowel > score_c:
     print(f"Kevin {score_vowel}")
+elif score_vowel == score_c:
+    print("Draw")
 else:
     print(f"Stuart {score_c}")
 ```
@@ -95,3 +99,38 @@ else:
 
 ### Output
 ```Stuart 12```
+
+
+---
+
+# Solution-2 : Less time complexity
+
+Above, the word list and the word-count frequency is an unecessary by-product as its not used in the final output.
+So we just need to focus on counting the words rather than storing the sub-words...
+```none
+Count of sub-words for 'cat' :
+Starting with 'c' => ['c','ca','cat']
+Starting with 'a' => ['a','at']
+Starting with 't' => ['t'] 
+```
+
+From above we see word count is substring length, i.e. 'cat' => 3 sub-words, 'at' => 2 sub-words, etc...
+
+```
+string = 'BANANA'
+vowel =['A','E','I','O','U']
+S=0
+K=0
+for i in range(len(string)):
+    print(string[i],len(string)-i)
+    if string[i] in vowel:
+        K+= len(string)-i
+    else:
+        S+=len(string)-i
+if S>K:
+    print("Stuart"+" "+ "%d" % S)
+elif K>S:
+    print("Kevin"+" "+'%d' % K)
+else:
+    print("Draw")
+```
